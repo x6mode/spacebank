@@ -1,7 +1,7 @@
 export abstract class Entity {
   public id: string;
-  
-  constructor () {
+
+  constructor() {
     this.id = crypto.randomUUID();
   }
 }

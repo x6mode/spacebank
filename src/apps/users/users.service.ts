@@ -1,23 +1,20 @@
-import { HttpException, Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from "@nestjs/common";
 
-import { newUserDTO } from '@dto/user.dto';
+import { newUserDTO } from "@dto/user.dto";
 
-import { UserEntity } from '@entity/user.entity';
+import { UserEntity } from "@entity/user.entity";
 
-import { UsersRepository } from '@repository/users.repository';
-
+import { UsersRepository } from "@repository/users.repository";
 
 @Injectable()
 export class UsersService {
-  constructor (
-    private UsersRepository: UsersRepository
-  ) {}
+  constructor(private UsersRepository: UsersRepository) {}
 
-  public getUser(id: UserEntity['id']): UserEntity {
+  public getUser(id: UserEntity["id"]): UserEntity {
     const foundEntity = this.UsersRepository.findById(id);
 
-    if (! foundEntity) {
-      throw new HttpException('This user not found!', 404);
+    if (!foundEntity) {
+      throw new HttpException("This user not found!", 404);
     }
 
     delete foundEntity.password;
@@ -25,7 +22,7 @@ export class UsersService {
     return foundEntity;
   }
 
-  public createUser(user: newUserDTO): UserEntity['id'] {
+  public createUser(user: newUserDTO): UserEntity["id"] {
     return this.UsersRepository.createWithDTO(user);
   }
 }
