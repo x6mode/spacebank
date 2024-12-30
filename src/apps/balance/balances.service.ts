@@ -1,4 +1,4 @@
-import { HttpException, Injectable } from "@nestjs/common";
+import { HttpException, Injectable, Logger } from "@nestjs/common";
 
 import { UserEntity } from "@entity/user.entity";
 
@@ -13,6 +13,7 @@ export class BalancesService {
     const balance = user.balance;
 
     if (balance === undefined || balance === null) {
+      Logger.verbose(`Not found balance for user with ID: ${userId}`);
       throw new HttpException("Not found balance for this user!", 404);
     }
 
@@ -27,6 +28,7 @@ export class BalancesService {
     const balanceUserFrom = this.getUserBalance(userFrom);
 
     if (balanceUserFrom < vault) {
+      Logger.verbose(`User with ID: ${userFrom} doesn't have balance for transaction`);
       throw new HttpException(
         "User doesnt have neednt vault for make transaction!",
         409,

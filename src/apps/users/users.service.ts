@@ -1,4 +1,4 @@
-import { HttpException, Injectable } from "@nestjs/common";
+import { HttpException, Injectable, Logger } from "@nestjs/common";
 
 import { newUserDTO } from "@dto/user.dto";
 
@@ -14,6 +14,7 @@ export class UsersService {
     const foundEntity = this.UsersRepository.findById(id);
 
     if (!foundEntity) {
+      Logger.verbose(`User with ID: ${id} is not found!`);
       throw new HttpException("This user not found!", 404);
     }
 

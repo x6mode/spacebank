@@ -25,7 +25,7 @@ export class UsersRepository
 
     newUser.email = user.email;
     newUser.name = user.name;
-    newUser.balance = 100;
+    newUser.balance = 0;
     newUser.setPassword(user.password);
 
     const createdUser = this.create(newUser);
