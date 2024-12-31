@@ -1,3 +1,5 @@
+major.minor.micro
+
 - [x] Transaction
   - [x] Свой модуль
   - [x] Свой сервис
