@@ -1,6 +1,7 @@
 import { HttpException, Injectable, Logger } from "@nestjs/common";
 
 import { newUserDTO } from "@dto/user.dto";
+import { TransactionSchema } from "@schema/transaction.schema";
 
 import { UserEntity } from "@entity/user.entity";
 
@@ -14,7 +15,7 @@ export class UsersService {
     const foundEntity = this.UsersRepository.findById(id);
 
     if (!foundEntity) {
-      Logger.verbose(`User with ID: ${id} is not found!`);
+      Logger.verbose(`User with ID: ${id} is not found!`, "UsersService");
       throw new HttpException("This user not found!", 404);
     }
 
@@ -23,7 +24,28 @@ export class UsersService {
     return foundEntity;
   }
 
-  public createUser(user: newUserDTO): UserEntity["id"] {
-    return this.UsersRepository.createWithDTO(user);
+  public createUser(dto: newUserDTO): UserEntity["id"] {
+    return this.UsersRepository.createWithDTO(dto);
+  }
+
+  public makeTransactionToUser({ userFrom, userTo, vault }: TransactionSchema) {
+    const userFromAccount = this.getUser(userFrom);
+
+    if (userFromAccount.balance < vault) {
+      Logger.verbose(
+        `User with ID: ${userFrom} doesn't have balance for transaction`,
+        "BalancesService",
+      );
+
+      throw new HttpException(
+        "User doesnt have need vault for make transaction!",
+        409,
+      );
+    }
+
+    const userToAccount = this.getUser(userTo);
+
+    userFromAccount.balance -= vault;
+    userToAccount.balance += vault;
   }
 }

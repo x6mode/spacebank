@@ -8,11 +8,6 @@ import { BaseRepository } from "@repository/base.repository";
 
 export interface IUsersRepository {
   createWithDTO(user: newUserDTO): UserEntity["id"];
-  changeUserBalance(
-    userId: UserEntity["id"],
-    type: "add" | "remove",
-    vault: UserEntity["balance"],
-  ): void;
 }
 
 @Injectable()
@@ -31,19 +26,5 @@ export class UsersRepository
     const createdUser = this.create(newUser);
 
     return createdUser.id;
-  }
-
-  public changeUserBalance(
-    userId: UserEntity["id"],
-    type: "add" | "remove",
-    vault: UserEntity["balance"],
-  ): void {
-    const user = this.findById(userId);
-
-    if (type === "add") {
-      user.balance += vault;
-    } else {
-      user.balance -= vault;
-    }
   }
 }

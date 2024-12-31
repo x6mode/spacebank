@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   HttpCode,
+  HttpStatus,
   Param,
   Post,
   UsePipes,
@@ -11,49 +12,24 @@ import {
 
 import { UserEntity } from "@entity/user.entity";
 
-import { BalancesService } from "@apps/balance/balances.service";
 import { UsersService } from "./users.service";
 
 import { newUserDTO } from "@dto/user.dto";
 
-import { TransactionSchema } from "@schema/transaction.schema";
-
-@Controller()
+@Controller("/api/users/")
 export class UsersController {
-  constructor(
-    private UsersService: UsersService,
-    private BalancesService: BalancesService,
-  ) {}
+  constructor(private UsersService: UsersService) {}
 
-  @Get("/api/users/:userId/")
+  @Get("/:userId/")
+  @HttpCode(HttpStatus.OK)
   public getUserById(@Param("userId") id: UserEntity["id"]) {
     return this.UsersService.getUser(id);
   }
 
-  @Get("/api/users/:userId/balance/")
-  public getWalletForUser(
-    @Param("userId") userId: UserEntity["id"],
-  ): UserEntity["balance"] {
-    return this.BalancesService.getUserBalance(userId);
-  }
-
-  @Post("/api/users/create/")
+  @Post("/create/")
   @UsePipes(new ValidationPipe())
-  @HttpCode(200)
+  @HttpCode(HttpStatus.OK)
   public createUser(@Body() user: newUserDTO) {
     return this.UsersService.createUser(user);
-  }
-
-  @Post("/api/transaction/send")
-  @UsePipes(new ValidationPipe())
-  @HttpCode(200)
-  public sendVaultToUser(@Body() transaction: TransactionSchema) {
-    const { userFrom, userTo, vault } = transaction;
-
-    return this.BalancesService.transferBalanceUserToUser(
-      userFrom,
-      userTo,
-      vault,
-    );
   }
 }

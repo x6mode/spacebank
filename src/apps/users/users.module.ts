@@ -6,10 +6,9 @@ import { UsersService } from "./users.service";
 
 import { UsersRepository } from "@repository/users.repository";
 
-import { BalancesService } from "@apps/balance/balances.service";
-
 @Module({
   controllers: [UsersController],
-  providers: [UsersService, UsersRepository, BalancesService],
+  providers: [UsersService, UsersRepository],
+  exports: [UsersService],
 })
 export class UsersModule {}
