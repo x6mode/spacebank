@@ -2,7 +2,7 @@ import { HttpException, Injectable, Logger } from "@nestjs/common";
 
 import { UsersService } from "@apps/users/users.service";
 
-import { TransactionSchema } from "@schema/transaction.schema";
+import { TransactionSchema } from "src/schemas/transaction.schema";
 
 @Injectable()
 export class TransactionsService {

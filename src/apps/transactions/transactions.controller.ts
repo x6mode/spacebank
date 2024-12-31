@@ -8,7 +8,7 @@ import {
   ValidationPipe,
 } from "@nestjs/common";
 
-import { TransactionSchema } from "@schema/transaction.schema";
+import { TransactionSchema } from "src/schemas/transaction.schema";
 
 import { TransactionsService } from "./transactions.service";
 

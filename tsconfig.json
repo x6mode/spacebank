@@ -23,7 +23,7 @@
       "@apps/*": ["./src/apps/*"],
       "@dto/*": ["./src/dto/*"],
       "@util/*": ["./src/util/*"],
-      "@schema/*": ["./src/schema/*"],
+      "@schemas/*": ["src/schemas/*"],
       "@tools/*": ["./src/tools/*"]
     }
   }

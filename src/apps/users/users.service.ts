@@ -1,7 +1,7 @@
 import { HttpException, Injectable, Logger } from "@nestjs/common";
 
 import { newUserDTO } from "@dto/user.dto";
-import { TransactionSchema } from "@schema/transaction.schema";
+import { TransactionSchema } from "src/schemas/transaction.schema";
 
 import { UserEntity } from "@entity/user.entity";
 
