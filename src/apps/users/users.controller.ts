@@ -29,7 +29,7 @@ export class UsersController {
   @Post("/create/")
   @UsePipes(new ValidationPipe())
   @HttpCode(HttpStatus.OK)
-  public createUser(@Body() user: newUserDTO) {
+  public createUser(@Body() user: newUserDTO): Omit<UserEntity, 'password'> {
     return this.UsersService.createUser(user);
   }
 }

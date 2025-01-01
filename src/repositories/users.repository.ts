@@ -7,7 +7,7 @@ import { UserEntity } from "@entity/user.entity";
 import { BaseRepository } from "@repository/base.repository";
 
 export interface IUsersRepository {
-  createWithDTO(user: newUserDTO): UserEntity["id"];
+  createWithDTO(user: newUserDTO): UserEntity;
 }
 
 @Injectable()
@@ -15,7 +15,7 @@ export class UsersRepository
   extends BaseRepository<UserEntity>
   implements IUsersRepository
 {
-  public createWithDTO(user: newUserDTO): UserEntity["id"] {
+  public createWithDTO(user: newUserDTO): UserEntity {
     const newUser = new UserEntity();
 
     newUser.email = user.email;
@@ -23,8 +23,6 @@ export class UsersRepository
     newUser.balance = 0;
     newUser.setPassword(user.password);
 
-    const createdUser = this.create(newUser);
-
-    return createdUser.id;
+    return this.create(newUser);
   }
 }
