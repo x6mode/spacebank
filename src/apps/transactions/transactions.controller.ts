@@ -8,11 +8,11 @@ import {
   ValidationPipe,
 } from "@nestjs/common";
 
-import { TransactionSchema } from "src/schemas/transaction.schema";
+import { TransactionSchema } from "@schemas/transaction.schema";
 
 import { TransactionsService } from "./transactions.service";
 
-@Controller("/api/transaction/")
+@Controller("/api/transactions/")
 export class TransactionsController {
   constructor(private TransactionsService: TransactionsService) {}
 

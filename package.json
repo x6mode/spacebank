@@ -7,6 +7,7 @@
   "scripts": {
     "build": "nest build",
     "start": "cls && nest start",
+    "docker": "docker-compose up -d",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",

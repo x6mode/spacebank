@@ -21,9 +21,9 @@
       "@entity/*": ["./src/entities/*"],
       "@repository/*": ["./src/repositories/*"],
       "@apps/*": ["./src/apps/*"],
-      "@dto/*": ["./src/dto/*"],
+      "@dto/*": ["./src/dto/objects/*"],
+      "@schemas/*": ["./src/dto/schemas/*"],
       "@util/*": ["./src/util/*"],
-      "@schemas/*": ["src/schemas/*"],
       "@tools/*": ["./src/tools/*"]
     }
   }
